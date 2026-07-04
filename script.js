@@ -46,6 +46,40 @@ appNameEl.addEventListener('blur', () => {
   if (heading) heading.textContent = `Hi, I'm ${newName} ✦ How can I help?`;
 });
 
+// ── Chat ──
+
+const form = document.getElementById('input-bar');
+const input = document.getElementById('message-input');
+
+function addBubble(text, role) {
+  const msg = document.createElement('div');
+  msg.className = `message message--${role}`;
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = text;
+  msg.appendChild(bubble);
+  messageArea.appendChild(msg);
+  messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Hide welcome on first message
+  const welcome = document.getElementById('welcome-message');
+  if (welcome) welcome.remove();
+
+  addBubble(text, 'user');
+  input.value = '';
+
+  setTimeout(() => {
+    addBubble("I'm just a demo brain for now — real AI coming soon 🚀", 'ai');
+  }, 1000);
+});
+
 function buildWelcome(name) {
   const wrapper = document.createElement('div');
   wrapper.id = 'welcome-message';
