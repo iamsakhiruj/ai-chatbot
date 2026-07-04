@@ -42,16 +42,33 @@ appNameEl.addEventListener('blur', () => {
   appNameEl.contentEditable = 'false';
   saveAppName(newName);
   document.title = newName;
-  const welcome = document.getElementById('welcome-message');
-  if (welcome) welcome.textContent = `Welcome to ${newName}! Send a message to get started.`;
+  const heading = document.querySelector('#welcome-message .welcome-heading');
+  if (heading) heading.textContent = `Hi, I'm ${newName} ✦ How can I help?`;
 });
+
+function buildWelcome(name) {
+  const wrapper = document.createElement('div');
+  wrapper.id = 'welcome-message';
+
+  const icon = document.createElement('div');
+  icon.className = 'welcome-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.textContent = '✦';
+
+  const heading = document.createElement('p');
+  heading.className = 'welcome-heading';
+  heading.textContent = `Hi, I'm ${name} ✦ How can I help?`;
+
+  const sub = document.createElement('p');
+  sub.className = 'welcome-sub';
+  sub.textContent = 'Ask me anything to get started.';
+
+  wrapper.append(icon, heading, sub);
+  return wrapper;
+}
 
 // Init: apply saved name and show welcome message
 const savedName = getAppName();
 appNameEl.textContent = savedName;
 document.title = savedName;
-
-const welcome = document.createElement('p');
-welcome.id = 'welcome-message';
-welcome.textContent = `Welcome to ${savedName}! Send a message to get started.`;
-messageArea.appendChild(welcome);
+messageArea.appendChild(buildWelcome(savedName));
