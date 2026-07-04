@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova</title>
+  </head>
+  <body>
+    <header>
+      <h1>Nova</h1>
+    </header>
+
+    <main id="message-area" role="log" aria-live="polite">
+      <!-- chat messages will be appended here -->
+    </main>
+
+    <footer>
+      <form id="input-bar">
+        <input
+          type="text"
+          id="message-input"
+          name="message"
+          placeholder="Type a message…"
+          autocomplete="off"
+          aria-label="Message"
+        />
+        <button type="submit">Send</button>
+      </form>
+    </footer>
+  </body>
+</html>
